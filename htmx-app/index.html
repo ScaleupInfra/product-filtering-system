@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTMX Product Filtering</title>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+  </head>
+  <body>
+    <select
+      hx-get="http://localhost:8000/filter"
+      hx-trigger="change"
+      hx-target="#product-list"
+      hx-boost="true"
+      id="category"
+      name="category"
+      hx-include="#sort_by"
+    >
+      <option value="">All Categories</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Clothing">Clothing</option>
+    </select>
+
+    <select
+      hx-get="http://localhost:8000/filter"
+      hx-trigger="change"
+      hx-target="#product-list"
+      hx-boost="true"
+      id="sort_by"
+      name="sort_by"
+      hx-include="#category"
+    >
+      <option value="">Sort By</option>
+      <option value="price_asc">Price (Low to High)</option>
+      <option value="price_desc">Price (High to Low)</option>
+    </select>
+
+    <div
+      id="product-list"
+      hx-get="http://localhost:8000/filter"
+      hx-trigger="load"
+      hx-swap="innerHTML"
+    ></div>
+  </body>
+</html>
